@@ -14,13 +14,68 @@
   --success-color: #10b981;
 }
 
+/* Enhanced Dark Theme Overrides */
 [data-theme='dark'] {
-  --primary-color: #818cf8;
-  --secondary-color: #fb7185;
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-  --text-color: #f8fafc;
-  --text-light: #cbd5e1;
-  --card-bg: rgba(30, 41, 59, 0.7);
+  --primary-color: #38bdf8;
+  /* Sleek Neon Cyan */
+  --secondary-color: #c084fc;
+  /* Deep Neon Purple */
+  --bg-gradient: linear-gradient(135deg, #020617 0%, #0f172a 60%, #171033 100%);
+  --text-color: #f1f5f9;
+  --text-light: #94a3b8;
+  --card-bg: rgba(15, 23, 42, 0.65);
+}
+
+[data-theme='dark'] .info-card,
+[data-theme='dark'] .user-card,
+[data-theme='dark'] .student-form,
+[data-theme='dark'] .counter-container,
+[data-theme='dark'] .student-details-card,
+[data-theme='dark'] .modal-content,
+[data-theme='dark'] .recently-added {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .navbar {
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  [data-theme='dark'] .nav-links {
+    background: rgba(15, 23, 42, 0.95) !important;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+[data-theme='dark'] input[type="text"],
+[data-theme='dark'] input[type="email"],
+[data-theme='dark'] .search-input {
+  background-color: rgba(30, 41, 59, 0.7);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+[data-theme='dark'] input:focus,
+[data-theme='dark'] .search-input:focus {
+  background-color: rgba(30, 41, 59, 0.9);
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15) !important;
+}
+
+[data-theme='dark'] .user-card:hover {
+  box-shadow: 0 12px 25px rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+[data-theme='dark'] .submit-btn {
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
+
+[data-theme='dark'] .submit-btn:hover {
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
 }
 
 body {
