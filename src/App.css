@@ -228,6 +228,12 @@ h3 {
   color: var(--text-color);
 }
 
+.user-card .btn {
+  min-width: auto;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+}
+
 .loading {
   font-size: 1.5rem;
   color: var(--primary-color);
@@ -529,6 +535,16 @@ h3 {
 
   .user-card {
     padding: 1.25rem;
+  }
+
+  .user-card .btn {
+    width: 100%;
+    margin-top: 0.5rem !important;
+  }
+
+  .user-card>div[style*="display: flex"] {
+    flex-direction: column;
+    gap: 0.5rem !important;
   }
 }
 
