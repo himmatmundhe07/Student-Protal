@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Counter = () => {
-  const [value, setValue] = useState(0);
+  // Initialize state from localStorage if available, otherwise 0
+  const [value, setValue] = useState(() => {
+    const saved = localStorage.getItem('counterValue');
+    return saved !== null ? parseInt(saved, 10) : 0;
+  });
+
+  // Save to localStorage whenever value changes
+  useEffect(() => {
+    localStorage.setItem('counterValue', value);
+  }, [value]);
 
   const increment = () => setValue((prev) => prev + 1);
   const decrement = () => setValue((prev) => (prev > 0 ? prev - 1 : 0));
-  const reset = () => setValue(0);
+  const reset = () => {
+    setValue(0);
+    localStorage.setItem('counterValue', 0);
+  };
 
   return (
     <div className="page-container counter-wrapper">

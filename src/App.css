@@ -6,12 +6,21 @@
   /* Vibrant Indigo */
   --secondary-color: #f43f5e;
   /* Vibrant Rose */
-  --bg-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  --bg-gradient: linear-gradient(135deg, #e2e8f0 0%, #fbc2eb 100%);
   --text-color: #1e293b;
   --text-light: #475569;
   --card-bg: rgba(255, 255, 255, 0.85);
   --error-color: #ef4444;
   --success-color: #10b981;
+}
+
+[data-theme='dark'] {
+  --primary-color: #818cf8;
+  --secondary-color: #fb7185;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --text-color: #f8fafc;
+  --text-light: #cbd5e1;
+  --card-bg: rgba(30, 41, 59, 0.7);
 }
 
 body {
@@ -689,5 +698,73 @@ h3 {
 @media screen and (max-width: 600px) {
   .student-details-card {
     padding: 2rem 1.5rem;
+  }
+}
+
+/* Modal CSS */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.modal-title {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.modal-message {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+  margin-left: 1rem;
+}
+
+.theme-toggle-btn:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+  .theme-toggle-btn {
+    position: absolute;
+    right: 5%;
+    top: 15px;
   }
 }

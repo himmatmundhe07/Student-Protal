@@ -1,25 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from '../components/Modal';
 
 const Home = () => {
     const [students, setStudents] = useState([]);
+
+    // Modal State
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalAction, setModalAction] = useState(null); // 'clearAll' or student id
+    const [modalDetails, setModalDetails] = useState({ title: '', message: '' });
 
     useEffect(() => {
         const storedStudents = JSON.parse(localStorage.getItem('students')) || [];
         setStudents(storedStudents);
     }, []);
 
-    const handleDelete = (id) => {
-        const updatedStudents = students.filter(student => student.id !== id);
-        setStudents(updatedStudents);
-        localStorage.setItem('students', JSON.stringify(updatedStudents));
+    const confirmDelete = (id) => {
+        setModalAction(id);
+        setModalDetails({
+            title: 'Delete Student',
+            message: 'Are you sure you want to delete this student? This action cannot be undone.'
+        });
+        setIsModalOpen(true);
     };
 
-    const handleClearAll = () => {
-        if (window.confirm("Are you sure you want to delete all students? This cannot be undone.")) {
+    const confirmClearAll = () => {
+        setModalAction('clearAll');
+        setModalDetails({
+            title: 'Clear All Data',
+            message: 'Are you sure you want to delete ALL students? This action cannot be undone.'
+        });
+        setIsModalOpen(true);
+    };
+
+    const executeModalAction = () => {
+        if (modalAction === 'clearAll') {
             setStudents([]);
             localStorage.removeItem('students');
+        } else {
+            const id = modalAction;
+            const updatedStudents = students.filter(student => student.id !== id);
+            setStudents(updatedStudents);
+            localStorage.setItem('students', JSON.stringify(updatedStudents));
         }
+        setIsModalOpen(false);
     };
 
     return (
@@ -31,7 +55,7 @@ const Home = () => {
                 ) : (
                     <div>
                         <p>Total number of students: <strong>{students.length}</strong></p>
-                        <button className="submit-btn" style={{ marginTop: '2rem', maxWidth: '200px', backgroundColor: 'var(--error-color)', background: 'var(--error-color)' }} onClick={handleClearAll}>
+                        <button className="submit-btn" style={{ marginTop: '2rem', maxWidth: '200px', backgroundColor: 'var(--error-color)', background: 'var(--error-color)' }} onClick={confirmClearAll}>
                             Clear All Data
                         </button>
                     </div>
@@ -54,7 +78,7 @@ const Home = () => {
                                     <Link to={`/edit/${student.id}`} className="btn increment" style={{ flex: 1, textAlign: 'center', textDecoration: 'none' }}>
                                         Edit
                                     </Link>
-                                    <button className="btn decrement" style={{ flex: 1 }} onClick={() => handleDelete(student.id)}>
+                                    <button className="btn decrement" style={{ flex: 1 }} onClick={() => confirmDelete(student.id)}>
                                         Delete
                                     </button>
                                 </div>
@@ -63,6 +87,14 @@ const Home = () => {
                     </div>
                 </div>
             )}
+
+            <Modal
+                isOpen={isModalOpen}
+                title={modalDetails.title}
+                message={modalDetails.message}
+                onConfirm={executeModalAction}
+                onCancel={() => setIsModalOpen(false)}
+            />
         </div>
     );
 };
